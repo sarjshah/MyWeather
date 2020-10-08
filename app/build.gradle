@@ -1,0 +1,199 @@
+/*
+ * Copyright 2019, The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.practice.myweather"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Enables data binding.
+    buildFeatures {
+        dataBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:23.1.0'
+}
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+
+//----------------------------------------------------------------------------------------------------
+    //Kotlin
+    def kotlinVersion = "1.3.72"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+    // Support libraries
+    def supportLibraryVersion = "1.2.0"
+    implementation "androidx.appcompat:appcompat:$supportLibraryVersion"
+    implementation "androidx.fragment:fragment:$supportLibraryVersion"
+
+
+    //ConstraintLayout
+    def constraintLayoutVersion = "2.0.1"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
+
+    // Testing
+    def junitVersion = "4.13"
+    testImplementation "junit:junit:$junitVersion"
+
+    //------------------------------------------------------------------------------------------------
+
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+
+    // Lifecycle dependencies
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+
+
+    // Android KTX
+    def androidKTXVersion = "1.3.1"
+    implementation "androidx.core:core-ktx:$androidKTXVersion"
+
+
+    //Testing - Espresso
+    def espressoVersion = "3.3.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+
+
+    //Testing - AndroidX
+    def androidxtest = "1.3.0"
+
+    // Core library
+    androidTestImplementation "androidx.test:core:$androidxtest"
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation "androidx.test:runner:$androidxtest"
+    androidTestImplementation "androidx.test:rules:$androidxtest"
+
+    //Testing - AndroidX
+    def androidxjunittest = "1.1.2"
+    androidTestImplementation "androidx.test.ext:junit-ktx:$androidxjunittest"
+
+
+    def multidexVersion= "1.0.3"
+    implementation "com.android.support:multidex:$multidexVersion"
+
+    def moshiVersion = "1.6.0"
+    implementation "com.squareup.moshi:moshi:$moshiVersion"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    implementation "com.squareup.moshi:moshi-adapters:$moshiVersion"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+
+
+    //Retrofit
+    def retrofitVersion = "2.6.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+
+
+    // Room
+    def roomVersion = "2.0.0"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+
+    // Coroutines
+    def coroutineVersion = "1.1.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
+
+    // Navigation
+    def navigationVersion = "1.0.0-alpha08"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
+
+
+    // WorkManager dependency
+    def workVersion = "1.0.1"
+    implementation "android.arch.work:work-runtime-ktx:$workVersion"
+
+    //Recycler View
+    def recyclerViewVersion = "1.1.0"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+
+    //Card View
+    def cardviewVersion = "1.0.0"
+    implementation "androidx.cardview:cardview:$cardviewVersion"
+
+    //Glide
+    def glideVersion = "4.11.0"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    //Custom Tabs
+    def customTabsVersion = "1.2.0"
+    implementation "androidx.browser:browser:$customTabsVersion"
+
+    //Material Design
+    def materialDesignVersion = "1.1.0"
+    implementation "com.google.android.material:material:$materialDesignVersion"
+
+    // logging
+    def timberVersion = "4.7.1"
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    //Kodein
+    def kodeinVersion = "7.1.0"
+    implementation "org.kodein.di:kodein-di-generic-jvm:6.2.1"
+    implementation "org.kodein.di:kodein-di-framework-android-x:6.2.1"
+
+
+
+    // Better datetime support even on older Android devices
+    implementation "com.jakewharton.threetenabp:threetenabp:1.1.0"
+
+
+    //location
+    implementation "com.google.android.gms:play-services-location:16.0.0"
+
+    implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.18"
+}
